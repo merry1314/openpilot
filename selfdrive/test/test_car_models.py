@@ -477,7 +477,7 @@ routes = {
     'carFingerprint': NISSAN.LEAF,
     'enableCamera': True,
   },
-  "22c3dcce2dd627eb|2020-12-29--20-05-32": {
+  "22c3dcce2dd627eb|2020-12-30--16-38-48": {
     'carFingerprint': NISSAN.LEAF_2_ZERO,
     'enableCamera': True,
   },
