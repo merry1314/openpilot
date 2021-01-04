@@ -52,8 +52,8 @@ class CarState(CarStateBase):
     elif self.CP.carFingerprint in [CAR.LEAF, CAR.LEAF_2_ZERO]:
       if self.CP.carFingerprint == CAR.LEAF:
         ret.seatbeltUnlatched = cp.vl["SEATBELT"]["SEATBELT_DRIVER_LATCHED"] == 0
-      # TODO: fix this for LEAF_2_ZERO
-      #elif self.CP.carFingerprint == CAR.LEAF_2_ZERO:
+      elif self.CP.carFingerprint == CAR.LEAF_2_ZERO:
+        ret.seatbeltUnlatched = cp.vl["CANCEL_MSG"]["CANCEL_SEATBELT"] == 1
       ret.cruiseState.available = bool(cp.vl["CRUISE_THROTTLE"]["CRUISE_AVAILABLE"])
 
     speed = cp_adas.vl["PROPILOT_HUD"]["SET_SPEED"]
