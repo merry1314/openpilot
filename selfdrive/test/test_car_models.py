@@ -474,7 +474,7 @@ routes = {
     'enableCamera': True,
   },
   "5b7c365c50084530|2020-03-25--22-10-13": {
-    'carFingerprint': NISSAN.LEAF,
+    'carFingerprint': NISSAN.LEAF_GB,
     'enableCamera': True,
   },
   "22c3dcce2dd627eb|2020-12-30--16-38-48": {
