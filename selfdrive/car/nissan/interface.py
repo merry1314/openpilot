@@ -39,7 +39,7 @@ class CarInterface(CarInterfaceBase):
       ret.wheelbase = 2.705
       ret.centerToFront = ret.wheelbase * 0.44
       ret.steerRatio = 17
-    elif candidate in [CAR.LEAF, CAR.LEAF_2_ZERO]:
+    elif candidate in [CAR.LEAF_GB, CAR.LEAF_IC]:
       ret.mass = 1610 + STD_CARGO_KG
       ret.wheelbase = 2.705
       ret.centerToFront = ret.wheelbase * 0.44
