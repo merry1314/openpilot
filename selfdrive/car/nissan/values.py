@@ -12,7 +12,7 @@ class CarControllerParams:
 
 class CAR:
   XTRAIL = "NISSAN X-TRAIL 2017"
-  LEAF_GB = "NISSAN LEAF 2018 Glovebox"
+  LEAF_GB = "NISSAN LEAF 2018" # Glovebox
   LEAF_IC = "NISSAN LEAF 2018 Instrument Cluster"
   ROGUE = "NISSAN ROGUE 2019"
 
