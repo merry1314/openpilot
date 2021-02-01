@@ -13,6 +13,9 @@ class CarControllerParams:
 class CAR:
   XTRAIL = "NISSAN X-TRAIL 2017"
   LEAF = "NISSAN LEAF 2018"
+  # Leaf with ADAS @ instrument cluster instead of glovebox
+  # Currently the only known difference between the 'normal' leaf is
+  # the inverted seatbelt signal. 
   LEAF_IC = "NISSAN LEAF 2018 Instrument Cluster"
   ROGUE = "NISSAN ROGUE 2019"
 
@@ -35,9 +38,6 @@ FINGERPRINTS = {
       2: 5, 42: 8, 264: 3, 361: 8, 372: 8, 384: 8, 389: 8, 403: 8, 459: 7, 460: 4, 470: 8, 520: 1, 569: 8, 581: 8, 634: 7, 640: 8, 643: 5, 644: 8, 645: 8, 646: 5, 658: 8, 682: 8, 683: 8, 689: 8, 724: 6, 758: 3, 761: 2, 772: 8, 773: 6, 774: 7, 775: 8, 776: 6, 777: 7, 778: 6, 783: 3, 852: 8, 853: 8, 856: 8, 861: 8, 943: 8, 944: 1, 976: 6, 1008: 7, 1009: 8, 1010: 8, 1011: 7, 1012: 8, 1013: 8, 1019: 8, 1020: 8, 1021: 8, 1022: 8, 1057: 3, 1227: 8, 1228: 8, 1261: 5, 1342: 1, 1354: 8, 1361: 8, 1402: 8, 1459: 8, 1477: 8, 1497: 3, 1549: 8, 1573: 6, 1821: 8, 1837: 8
     },
   ],
-  # Leaf with ADAS @ instrument cluster instead of glovebox
-  # Currently the only known difference between the 'normal' leaf is
-  # the inverted seatbelt signal. 
   CAR.LEAF_IC: [
     {
       2: 5, 42: 6, 264: 3, 361: 8, 372: 8, 384: 8, 389: 8, 403: 8, 459: 7, 460: 4, 470: 8, 520: 1, 569: 8, 581: 8, 634: 7, 640: 8, 643: 5, 644: 8, 645: 8, 646: 5, 658: 8, 682: 8, 683: 8, 689: 8, 724: 6, 758: 3, 761: 2, 783: 3, 852: 8, 853: 8, 856: 8, 861: 8, 943: 8, 944: 1, 976: 6, 1001: 6, 1008: 7, 1011: 7, 1057: 3, 1227: 8, 1228: 8, 1229: 8, 1261: 5, 1342: 1, 1354: 8, 1361: 8, 1402: 8, 1459: 8, 1477: 8, 1497: 3, 1514: 6, 1549: 8, 1573: 6
