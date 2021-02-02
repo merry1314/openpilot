@@ -6,6 +6,7 @@
 
 #include "common/swaglog.h"
 #include "common/gpio.h"
+#include "common/util.h"
 
 #include "pigeon.h"
 
@@ -32,27 +33,27 @@ Pigeon * Pigeon::connect(const char * tty){
 }
 
 void Pigeon::init() {
-  usleep(1000*1000);
+  util::sleep_for(1000);
   LOGW("panda GPS start");
 
   // power off pigeon
-  set_power(0);
-  usleep(100*1000);
+  set_power(false);
+  util::sleep_for(100);
 
   // 9600 baud at init
   set_baud(9600);
 
   // power on pigeon
-  set_power(1);
-  usleep(500*1000);
+  set_power(true);
+  util::sleep_for(500);
 
   // baud rate upping
   send("\x24\x50\x55\x42\x58\x2C\x34\x31\x2C\x31\x2C\x30\x30\x30\x37\x2C\x30\x30\x30\x33\x2C\x34\x36\x30\x38\x30\x30\x2C\x30\x2A\x31\x35\x0D\x0A"s);
-  usleep(100*1000);
+  util::sleep_for(100);
 
   // set baud rate to 460800
   set_baud(460800);
-  usleep(100*1000);
+  util::sleep_for(100);
 
   // init from ubloxd
   // To generate this data, run test/ubloxd.py with the print statements enabled in the write function in panda/python/serial.py
@@ -88,7 +89,7 @@ void PandaPigeon::set_baud(int baud) {
   panda->usb_write(0xe4, 1, baud/300);
 }
 
-void PandaPigeon::send(std::string s) {
+void PandaPigeon::send(const std::string &s) {
   int len = s.length();
   const char * dat = s.data();
 
@@ -104,11 +105,11 @@ void PandaPigeon::send(std::string s) {
 
 std::string PandaPigeon::receive() {
   std::string r;
-
-  while (true){
-    unsigned char dat[0x40];
+  r.reserve(0x1000 + 0x40);
+  unsigned char dat[0x40];
+  while (r.length() < 0x1000){
     int len = panda->usb_read(0xe0, 1, 0, dat, sizeof(dat));
-    if (len <= 0 || r.length() > 0x1000) break;
+    if (len <= 0) break;
     r.append((char*)dat, len);
   }
 
@@ -179,11 +180,9 @@ void TTYPigeon::set_baud(int baud){
   assert(tcflush(pigeon_tty_fd, TCIOFLUSH) == 0);
 }
 
-void TTYPigeon::send(std::string s) {
-  int len = s.length();
-  const char * dat = s.data();
+void TTYPigeon::send(const std::string &s) {
+  int err = write(pigeon_tty_fd, s.data(), s.length());
 
-  int err = write(pigeon_tty_fd, dat, len);
   if(err < 0) { handle_tty_issue(err, __func__); }
   err = tcdrain(pigeon_tty_fd);
   if(err < 0) { handle_tty_issue(err, __func__); }
@@ -191,13 +190,13 @@ void TTYPigeon::send(std::string s) {
 
 std::string TTYPigeon::receive() {
   std::string r;
-
-  while (true){
-    char dat[0x40];
+  r.reserve(0x1000 + 0x40);
+  char dat[0x40];
+  while (r.length() < 0x1000){
     int len = read(pigeon_tty_fd, dat, sizeof(dat));
     if(len < 0) {
       handle_tty_issue(len, __func__);
-    } else if (len == 0 || r.length() > 0x1000){
+    } else if (len == 0){
       break;
     } else {
       r.append(dat, len);
